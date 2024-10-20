@@ -1,6 +1,9 @@
 This project uses the [esp8266-hal](https://github.com/esp-rs/esp8266-hal)
 to show you can develop for the ESP8266 in Rust.
 
+Blog post about this project:
+[https://andreas-mausch.de/blog/2024-10-20-esp01s/](https://andreas-mausch.de/blog/2024-10-20-esp01s/)
+
 Note: `esp8266-hal` is deprecated and missing important features like WiFi.
 But I was still interested if this would work at all.
 
