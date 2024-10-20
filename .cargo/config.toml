@@ -1,16 +1,13 @@
-[target.xtensa-esp32-none-elf]
+[target.xtensa-esp8266-none-elf]
 runner = "espflash flash --monitor"
-
 
 [env]
 ESP_LOG="info"
 
 [build]
-rustflags = [
-  "-C", "link-arg=-nostartfiles",
-]
+rustflags = ["-C", "link-arg=-nostartfiles", "-C", "link-arg=-Wl,-Tlink.x"]
 
-target = "xtensa-esp32-none-elf"
+target = "xtensa-esp8266-none-elf"
 
 [unstable]
 build-std = ["core"]

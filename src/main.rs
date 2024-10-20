@@ -1,19 +1,24 @@
+// Original file taken from:
+// https://github.com/esp-rs/esp8266-hal/blob/c1d0b06b611f571237dda0bfebd688b96a5dc62a/examples/blinky.rs
+
 #![no_std]
 #![no_main]
 
-use esp_backtrace as _;
-use esp_hal::{delay::Delay, prelude::*};
+use esp8266_hal::prelude::*;
+use esp8266_hal::target::Peripherals;
+use panic_halt as _;
 
 #[entry]
 fn main() -> ! {
-    #[allow(unused)]
-    let peripherals = esp_hal::init(esp_hal::Config::default());
-    let delay = Delay::new();
+    let dp = Peripherals::take().unwrap();
+    let pins = dp.GPIO.split();
+    let mut led = pins.gpio2.into_push_pull_output();
+    let (mut timer1, _) = dp.TIMER.timers();
 
-    esp_println::logger::init_logger_from_env();
+    led.set_high().unwrap();
 
     loop {
-        log::info!("Hello world!");
-        delay.delay(500.millis());
+        timer1.delay_ms(500);
+        led.toggle().unwrap();
     }
 }
